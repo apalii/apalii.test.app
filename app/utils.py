@@ -9,11 +9,12 @@ from aiohttp import web
 
 def get_repo(base_dir):
     repo = {}
-    exclude = {'__pycache__', 'venv', '.idea', '.git'}
+    exclude_dirs = {'__pycache__', 'venv', '.idea', '.git'}
+    exclude_files = {'.DS_Store', 'favicon.ico', 'app.sock'}
     for root, dirs, files in os.walk(base_dir, topdown=True):
-        dirs[:] = [d for d in dirs if d not in exclude]
+        dirs[:] = [d for d in dirs if d not in exclude_dirs]
         for file in files:
-            if file in {'.DS_Store', 'favicon.ico'}:
+            if file in exclude_files:
                 continue
             root_path = root.split('dr-apalii-test-app')[-1]
             with open(os.path.join(root, file), 'rb') as f:

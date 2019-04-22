@@ -2,3 +2,4 @@ aiohttp==3.5.4
 aiohttp-cache==1.0.3
 aiohttp-jinja2==1.1.0
 uvloop==0.12.2
+gunicorn==19.9.0
