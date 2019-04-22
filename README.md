@@ -13,7 +13,7 @@ BTW ngrok will be quite useful for the port forwarding : https://dashboard.ngrok
 ## Production deployment
 #### Choose your cloud provider
 
-Feel free to use any of cloud provider such as CoogleCloud, AWS, Microsoft Azure etc. 
+Feel free to use any of cloud providers such as CoogleCloud, AWS, Microsoft Azure etc. 
 But I am going to show you how to deploy Python app on Digital Ocean VPS hosting, 
 we are going to use Linux Ubuntu 18.04 LTS version.
 
@@ -104,7 +104,7 @@ uvloop-0.12.2.dist-info
 
 
 #### Setting up Nginx webserver 
-It is time to set up a proxy webserver for our Django app. 
+It is time to set up a proxy webserver for our python app. 
 I decided to take nginx which is one of the most robust web servers and is considered 
 as a best practice when it comes to deployment to production environment. 
 Nginx will proxy all incomming requests to our application which is going to be served 
@@ -199,20 +199,19 @@ you can use the aiohttp.GunicornUVLoopWebWorker worker class.
 
 See also https://docs.aiohttp.org/en/stable/deployment.html#start-gunicorn
 
-Do not forget about env vars like `DEBUG=True gunicorn ...`
+Do not forget about env vars like `DEBUG=True gunicorn ...` and `nohup` for development purposes.
 
 #### Create a Gunicorn systemd Service File
-We should implement a more robust way of starting and stopping the application server. 
-To accomplish this, we'll make a systemd service file.
+Now, we should implement a more robust way of starting and stopping the application server. 
+To accomplish this, we'll make a systemd service file with environment variables.
 
-##### Prepare GitHub app parameters
+##### Prepare GitHub app parameters:
 
 * Register app in your GitHub account https://github.com/settings/developers
 * Copy `client_id` and `client_secret`
 * Set `client_id` and `client_secret` environment variables in systemd unit file
 
 Create and open a systemd service file for Gunicorn with sudo privileges in your text editor:
-Gunicorn config file:
 
 ```
 $ sudo nano /etc/systemd/system/gunicorn.service
@@ -245,7 +244,7 @@ $ sudo systemctl status gunicorn
 
 #### Advanced http security settings
 
-So, let's modify our app.conf a bit :
+So, let's modify our ngnix app.conf a bit :
 
 ```
 ssl_protocols TLSv1.3;# Requires nginx >= 1.13.0 else use TLSv1.2
@@ -271,8 +270,12 @@ on the SSL Labs Test. In short, they set a strong Forward Secrecy enabled
 ciphersuite, they disable SSLv2 and SSLv3, add `HTTP Strict Transport Security` 
 and `X-Frame-Deny` headers and enable OCSP Stapling. Final configuration is the following:
 
-Also we want to disables emitting nginx version on error pages and in the “Server” 
-response header field `server_tokens off`.
+Also we want to disables emitting nginx version on error pages and in the “Server” response 
+header field by adding `server_tokens off` and redirect all the insecure connections to secure ones.
+
+`proxy_pass` was changed to unix socket due to gunicorn systemd unit configuration.
+
+
 
 ```
 server_tokens off;
@@ -346,6 +349,7 @@ server {
 ## Used libs
 * https://github.com/pyenv/pyenv
 * http://docs.gunicorn.org/en/stable/
+* https://uvloop.readthedocs.io/
 * https://aiohttp.readthedocs.io/
 * https://aiohttp-cache.readthedocs.io/
 * https://aiohttp-jinja2.readthedocs.io/en/stable/
