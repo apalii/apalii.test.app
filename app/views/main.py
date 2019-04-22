@@ -70,7 +70,7 @@ class GitHubCallbackView(web.View):
         headers = self.get_auth_headers(token)
         data = {
             'name': repo_name,
-            'description': 'Self replicating app from',
+            'description': f'Self replicating app from {settings.REPO_LINK}',
             'private': False
         }
         url = 'https://api.github.com/user/repos'

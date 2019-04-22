@@ -21,4 +21,5 @@ SCOPE = 'public_repo'
 
 # Repository
 REPO_NAME = 'self_replicate_app'
+REPO_LINK = 'https://github.com/apalii/' + REPO_NAME
 REPO = get_repo(BASE_DIR)
