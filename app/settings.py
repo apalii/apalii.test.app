@@ -6,7 +6,7 @@ from app.utils import get_repo
 DEBUG = os.environ['DEBUG'] == 'True'
 HOST = '127.0.0.1'
 PORT = 8000
-DOMAIN = 'https://selfreplicateapp.pp.ua/'
+DOMAIN = 'https://selfreplicateapp.pp.ua'
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Constants
