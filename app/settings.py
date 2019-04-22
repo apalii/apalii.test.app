@@ -16,6 +16,7 @@ DAY = HOUR * 24
 # GitHub settings
 CLIENT_ID = os.environ['CLIENT_ID']
 CLIENT_SECRET = os.environ['CLIENT_SECRET']
+GITHUB_AUTH_URL = 'https://github.com/login/oauth/authorize'
 SCOPE = 'public_repo'
 
 # Repository
