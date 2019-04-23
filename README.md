@@ -13,7 +13,7 @@ BTW ngrok will be quite useful for the port forwarding : https://dashboard.ngrok
 ## Production deployment
 #### Choose your cloud provider
 
-Feel free to use any of cloud providers such as CoogleCloud, AWS, Microsoft Azure etc. 
+Feel free to use any of cloud providers such as GoogleCloud, AWS, Microsoft Azure etc. 
 But I am going to show you how to deploy Python app on Digital Ocean VPS hosting, 
 we are going to use Linux Ubuntu 18.04 LTS version.
 
