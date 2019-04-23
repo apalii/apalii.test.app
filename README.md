@@ -70,6 +70,11 @@ Configure isolated python virtual environment using pyenv.
 $ pyenv virtualenv 3.7.3 self-rep-app
 $ pyenv local self-rep-app
 ```
+Some external tools (e.g. jedi) might require you to activate the virtualenv and conda environments.
+If eval "$(pyenv virtualenv-init -)" is configured in your shell, pyenv-virtualenv will automatically 
+activate/deactivate virtualenvs on entering/leaving directories which contain a .python-version file 
+that contains the name of a valid virtual environment as shown in the output of pyenv virtualenvs.
+
 Recheck that everything works correctly:
 ```
 root@andrii:~# .  /home/python/.pyenv/versions/3.7.3/envs/self-rep-app/bin/activate
