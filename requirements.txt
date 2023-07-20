@@ -1,4 +1,4 @@
-aiohttp==3.7.4
+aiohttp==3.8.5
 aiohttp-cache==1.0.3
 aiohttp-jinja2==1.1.0
 uvloop==0.12.2
